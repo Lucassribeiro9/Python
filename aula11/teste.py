@@ -1,4 +1,10 @@
-num1 = int(input('Digite um número: '));
-num2 = int(input('Digite um número: '));
+num1 = (input('Digite um número: '));
+num2 = (input('Digite outro número: '));
 
-print(f'Resultado: {num1 + num2}');
+#isdigit - checa se a string tem digitos
+if num1.isdigit() and num2.isdigit():
+    num1 = int(num1)
+    num2 = int(num2)
+    print(num1 + num2)
+else:
+     print('Não pude converter os números para realizar contas')      
