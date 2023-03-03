@@ -1,16 +1,17 @@
-"""Calculadora com while"""
+""" Calculadora com while """
 while True:
     numero_1 = input('Digite um número: ')
     numero_2 = input('Digite outro número: ')
-    operador = input('Digite o operador(+-/*): ')
+    operador = input('Digite o operador (+-/*): ')
 
     numeros_validos = None
     num_1_float = 0
     num_2_float = 0
-
+    7
     try:
         num_1_float = float(numero_1)
         num_2_float = float(numero_2)
+        numeros_validos = True
     except:
         numeros_validos = None
 
@@ -21,25 +22,30 @@ while True:
     operadores_permitidos = '+-/*'
 
     if operador not in operadores_permitidos:
-        print('Operador inválido')
+        print('Operador inválido.')
         continue
 
     if len(operador) > 1:
-        print('Digite apenas um operador')
+        print('Digite apenas um operador.')
         continue
 
     if operador == '+':
-        print(num_1_float + num_2_float)
+        resultado = num_1_float + num_2_float
+        print(f'A soma entre {num_1_float} e {num_2_float} é igual a {resultado}.')
     elif operador == '-':
-        print(num_1_float - num_2_float)
-    elif operador == '/':
-        print(num_1_float / num_2_float)
+        resultado = num_1_float - num_2_float
+        print(f'A subtração entre {num_1_float} e {num_2_float} é igual a {resultado}.')
     elif operador == '*':
-        print(num_1_float * num_2_float)
+        resultado = num_1_float * num_2_float
+        print(f'A multiplicação entre {num_1_float} e {num_2_float} é igual a {resultado}.')
+    elif operador == '/':
+        resultado = num_1_float / num_2_float
+        print(f'A divisão entre {num_1_float} e {num_2_float} é igual a {resultado}.')
     else:
-        print('Alguma coisa errada você fez')
+        print('Operador inválido.')
+    ###
 
     sair = input('Quer sair? [s]im: ').lower().startswith('s')
-    print(sair)
+
     if sair is True:
         break
