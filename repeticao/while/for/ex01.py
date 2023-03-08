@@ -1,6 +1,6 @@
 import os
 
-palavra_secreta = 'layout'
+palavra_secreta = 'bahia'
 letras_acertadas = ''
 tentativas = 0
 
@@ -25,7 +25,7 @@ while True:
     print(palavra_formada)
     
     if palavra_formada == palavra_secreta:
-        os.system('clear')
+        os.system('cls') # cls se estiver no windows, clear se estiver em outra plataforma
         print("Você acertou!")
         print('A palavra era:', palavra_formada)
         print('Tentativas:', tentativas)
