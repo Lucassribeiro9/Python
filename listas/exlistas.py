@@ -12,12 +12,19 @@ lista = []
 while True:
     escolha = input('Selecione uma opção: \n[i]nserir [a]pagar [l]istar: ').strip()
     if escolha == 'i':
+        os.system('clear')
         item = input('Digite o nome do item: ').strip()
-        lista.insert(0, item)
-    if escolha == 'a':
+        lista.append(item)
+    elif escolha == 'a':
         indice = int(input('Escolha o índice para apagar: '))
-        lista.pop(indice)
-    if escolha == 'l':
+        if 0 <= indice < len(lista):
+            del lista[indice]
+        else:
+            print('O índice informado não existe.')
+    elif escolha == 'l':
+        os.system('clear')
+        if len(lista) == 0:
+            print('Não existe índice para listar')
         indices = range(len(lista))
         for item in indices:
             print(f'{item} - {lista[item]}')
@@ -25,4 +32,3 @@ while True:
     os.system('clear')
     if resp == 'N':
         break
-    
