@@ -33,8 +33,8 @@ while True:
         for i, item in enumerate(lista):
             print(f'{i} - {item}')
     else:
-        print('Opção inválida. Digite novamente.')
-    resp = str(input('Quer continuar? [S/N] ')).strip().upper()[0]
-    os.system('clear')
-    if resp == 'N':
-        break
+        resp = str(input('Opção inválida. Quer continuar no sistema? [S/N] ')).strip().upper()[0]
+        os.system('clear')
+        if resp == 'N':
+            print('Obrigado!.')
+            break
