@@ -16,18 +16,24 @@ while True:
         item = input('Digite o nome do item: ').strip()
         lista.append(item)
     elif escolha == 'a':
-        indice = int(input('Escolha o índice para apagar: '))
-        if 0 <= indice < len(lista):
-            del lista[indice]
-        else:
+        indice = input('Escolha o índice para apagar: ')
+        try:
+            int_indice = int(indice)
+            del lista[int_indice]
+        except IndexError:
             print('O índice informado não existe.')
+        except ValueError:
+            print('Por favor, digite um número de índice válido.')
+        except Exception:
+            print('Ocorreu um erro inesperado.')
     elif escolha == 'l':
         os.system('clear')
         if len(lista) == 0:
             print('Não existe índice para listar')
-        indices = range(len(lista))
-        for item in indices:
-            print(f'{item} - {lista[item]}')
+        for i, item in enumerate(lista):
+            print(f'{i} - {item}')
+    else:
+        print('Opção inválida. Digite novamente.')
     resp = str(input('Quer continuar? [S/N] ')).strip().upper()[0]
     os.system('clear')
     if resp == 'N':
