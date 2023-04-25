@@ -1,7 +1,8 @@
 frase = 'Frase teste de, split'
-lista_frase = frase.split(',')
+lista_frase_limpa = frase.split(',')
 
-for i, frase in enumerate(lista_frase):
-    lista_frase[i] = lista_frase[i].strip()
-    
+lista_frase = []
+for i, frase in enumerate(lista_frase_limpa):
+    lista_frase.append(lista_frase_limpa[i].strip())    
+print(lista_frase_limpa)
 print(lista_frase)
