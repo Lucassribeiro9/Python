@@ -6,3 +6,7 @@ for i, frase in enumerate(lista_frase_limpa):
     lista_frase.append(lista_frase_limpa[i].strip())    
 print(lista_frase_limpa)
 print(lista_frase)
+
+
+frase_unida = '-'.join(lista_frase)
+print(frase_unida)
