@@ -8,4 +8,7 @@ for digito in nove_digitos:
     cont_regressivo -= 1
 digito = (resultado * 10) % 11
 digito = digito if digito <= 9 else 0
-print(digito)    
+print(digito)
+
+dez_digitos = cpf[:9] + str(digito)
+    
