@@ -1,4 +1,8 @@
-cpf_usuario = '74682489070'
+import re
+
+
+cpf_usuario = '746.824.890-70'
+cpf_usuario = re.sub(r'[^0-9]', '', cpf_usuario)
 nove_digitos = cpf_usuario[:9]
 cont_regressivo_1 = 10
 resultado_dig1 = 0
