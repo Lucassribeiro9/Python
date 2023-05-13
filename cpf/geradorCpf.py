@@ -4,6 +4,7 @@ for _ in range(50):
     nove_digitos = ''
     for i in range(9):
         nove_digitos += str(random.randint(0, 9))
+    print(nove_digitos)
 
 
     contador_regressivo_1 = 10
@@ -26,5 +27,4 @@ for _ in range(50):
     digito_2 = digito_2 if digito_2 <= 9 else 0
 
     cpf_gerado_pelo_calculo = f'{nove_digitos}{digito_1}{digito_2}'
- 
     
