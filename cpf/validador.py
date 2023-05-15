@@ -30,7 +30,7 @@ digito_2 = (result_dig2 * 10) % 11
 digito_2 = digito_2 if digito_2 <= 9 else 0
 
 cpf_gerado_pelo_calculo = f'{nove_digitos}{digito_1}{digito_2}'
-if cpf_entrada == cpf_gerado_pelo_calculo:
+if cpf_digitado == cpf_gerado_pelo_calculo:
     print(f'{cpf_entrada} é válido')
 else:
     print('CPF inválido')
