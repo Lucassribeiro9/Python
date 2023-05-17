@@ -1,4 +1,3 @@
-import sys
 
 def soma(x, y):
     if x or y <= 0:
