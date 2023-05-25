@@ -1,4 +1,5 @@
 pessoa = {}
 
-pessoa['name'] = 'Lucas'
-print(pessoa['name'])
+chave = 'nome'
+pessoa[chave] = 'Lucas'
+print(pessoa[chave])
