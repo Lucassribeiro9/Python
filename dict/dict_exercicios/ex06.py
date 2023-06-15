@@ -12,6 +12,15 @@ print(lista)
 # outro exemplo que pode ser feito com listas dentro de listas
 
 def lista_usuario(tamanho):
+    """
+    Generates a list of lists with the specified length, where each inner list contains 10 random integers between 1 and 50. 
+
+    Args:
+        tamanho (int): The number of inner lists to generate.
+
+    Returns:
+        list: A list of sub-lists, where each sub-list contains 10 random integers.
+    """
     lst = []
     for i in range(tamanho):
         sub_lst = []
