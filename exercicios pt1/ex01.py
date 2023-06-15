@@ -1,4 +1,4 @@
-num1 = print('Digite um número inteiro: ')
+num1 = input('Digite um número inteiro: ')
 
 if num1.isdigit():
     num1 = int(num1)
