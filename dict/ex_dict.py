@@ -1,3 +1,6 @@
+import os
+
+
 perguntas = [
     {
         "Pergunta": "Quanto é 2+2?",
@@ -77,5 +80,11 @@ while True:
     for participante, respostas in participantes.items():
         qtd_acertos = sum(respostas)
         print(f"{participante}: {qtd_acertos} acertos de {len(perguntas)}")
-
-    break
+    resposta = input("Deseja continuar? S/N: ").upper()
+    if resposta == "N":
+        print("Programa encerrado.")
+        break
+    else:
+        os.system("cls")
+        notas = {}
+        continue
