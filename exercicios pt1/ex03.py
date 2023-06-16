@@ -31,10 +31,10 @@ while True:
     for i in range(qtd_materias):
         while True:
             materia = input("Digite a materia: ")
-            if isinstance(materia, str):
+            if materia.isalpha():
                 break
             else:
-                print("Materia inválida.")
+                print("Materia inválida. Digite o nome da materia: ")
 
         while True:
             try:
