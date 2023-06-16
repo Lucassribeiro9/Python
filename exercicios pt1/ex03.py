@@ -34,7 +34,7 @@ while True:
             if materia.isalpha():
                 break
             else:
-                print("Materia inválida. Digite o nome da materia: ")
+                print("Materia inválida.")
 
         while True:
             try:
