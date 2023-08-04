@@ -1,3 +1,4 @@
+import sys
 """
     Calculates the increased price based on a given percentage.
 
@@ -11,3 +12,4 @@
 def aumento_porcentagem(preco, percentual):
     preco = preco + (preco * percentual)
     return preco
+
