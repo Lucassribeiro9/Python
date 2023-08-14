@@ -11,13 +11,16 @@ def criar_funcao(funcao):
         return resultado
     return funcao_decorada
 
+@criar_funcao
 def inverte_string(string):
+    print(f'{inverte_string.__name__}')
     return string[::-1]
+
 
 def is_string(string):
     if not isinstance(string, str):
         raise TypeError('O argumento precisa ser uma string.')
 
-checando_string = criar_funcao(inverte_string)
-invertida = checando_string('123')
+
+invertida = inverte_string('123')
 print(invertida)
