@@ -109,3 +109,36 @@ while True:
             print("Empresa não encontrada.")
 
     elif opcao == "3":
+        nome_banco = input("Nome do banco: ")
+        banco = next((b for b in bancos if b.nome == nome_banco), None)
+        if banco:
+            descricao = input("Descrição da receita: ")
+            valor = float(input("Valor da receita: "))
+            banco.adicionar_recebimento(valor)
+            fluxo_de_caixa.adicionar_transacao(Transacao(descricao, valor))
+            print("Receita adicionada com sucesso!")
+        else:
+            print("Banco não encontrado.")
+
+    elif opcao == "4":
+        nome_banco = input("Nome do banco: ")
+        banco = next((b for b in bancos if b.nome == nome_banco), None)
+        if banco:
+            descricao = input("Descrição da despesa: ")
+            valor = float(input("Valor da despesa: "))
+            banco.adicionar_gasto(valor)
+            fluxo_de_caixa.adicionar_transacao(Transacao(descricao, -valor))
+            print("Despesa adicionada com sucesso!")
+        else:
+            print("Banco não encontrado.")
+
+    elif opcao == "5":
+        saldo = fluxo_de_caixa.calcular_saldo()
+        print("Saldo do fluxo de caixa:", saldo)
+
+    elif opcao == "6":
+        print("Encerrando o programa...")
+        break
+
+    else:
+        print("Opção inválida. Tente novamente.")
