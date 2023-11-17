@@ -7,6 +7,7 @@ class Pessoa:
 
     def get_ano_nasc(self):
         return Pessoa.ano_atual - self.idade
-    
-p1 = Pessoa('Lucas', 26)
+dados = {'nome': 'Lucas', 'idade': 26}    
+p1 = Pessoa(**dados)
+print(vars(p1))
 print(p1.get_ano_nasc())
