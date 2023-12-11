@@ -1,2 +1,4 @@
 ERRO: Algum erro (LogFileMixin)
 SUCESSO: Algum sucesso (LogFileMixin)
+SUCESSO: Samsung S23 ligado (Smartphone)
+ERRO: Iphone 15 desligado (Smartphone)
