@@ -10,9 +10,12 @@ class MyOpen:
     def __exit__(self, class_exception, exception_, traceback_):
         print("Fechando arquivo")
         self._arquivo.close()
+        print('EXCEPTION', exception_)
+        raise exception_
+
         
 instancia = MyOpen('aula240.txt', 'w')
 
 with instancia as arquivo:
-    arquivo.write('Teste!')
+    arquivo.write('Teste!', 123)
     print('WITH', arquivo)
