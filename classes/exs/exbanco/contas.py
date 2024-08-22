@@ -18,3 +18,16 @@ class Conta(abc.ABC):
     def detalhes(self, msg=''):
         print(f'O seu saldo é {self.saldo:.2f} {msg}')    
     
+    class ContaPoupanca(Conta):
+        def sacar(self, valor):
+            valor_pos_saque = self.saldo - valor
+            if valor_pos_saque > 0:
+                self.saldo -= valor
+                self.detalhes(f'Saque: R${valor:.2f}')
+                return self.saldo
+        
+            print('Saldo insuficiente para saque')
+            self.detalhes(f'Saldo insuficiente para saque: R${valor:.2f}')
+
+if __name__ == '__main__':
+    ...
