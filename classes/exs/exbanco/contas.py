@@ -18,7 +18,7 @@ class Conta(abc.ABC):
     def detalhes(self, msg=''):
         print(f'O seu saldo é {self.saldo:.2f} {msg}')    
     
-    class ContaPoupanca(Conta):
+class ContaPoupanca(Conta):
         def sacar(self, valor):
             valor_pos_saque = self.saldo - valor
             if valor_pos_saque > 0:
