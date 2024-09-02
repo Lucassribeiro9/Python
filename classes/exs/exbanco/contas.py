@@ -29,5 +29,19 @@ class ContaPoupanca(Conta):
             print('Saldo insuficiente para saque')
             self.detalhes(f'Saldo insuficiente para saque: R${valor:.2f}')
 
+class ContaCorrente(Conta):
+    def __init__(self, agencia, conta, saldo=0, limite=0):
+        super().__init__(agencia, conta, saldo)
+        self.limite = limite
+
+    def sacar(self, valor):
+        valor_pos_saque = self.saldo + self.limite - valor
+        if valor_pos_saque > 0:
+            self.saldo -= valor
+            self.detalhes(f'Saque: R${valor:.2f}')
+            return self.saldo
+
+        print('Saldo insuficiente para saque')
+        self.detalhes(f'Saldo insuficiente para saque: R${valor:.2f}')
 if __name__ == '__main__':
     ...
