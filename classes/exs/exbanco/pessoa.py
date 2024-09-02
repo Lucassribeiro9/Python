@@ -18,3 +18,16 @@ class Pessoa:
     @idade.setter
     def idade(self, idade):
         self._idade = idade
+
+class Cliente(Pessoa):
+    def __init__(self, nome: str, idade: int) -> None:
+        super().__init__(nome, idade)
+        self.conta = None
+
+if __name__ == '__main__':
+    pessoa = Pessoa('Lucas', 26)
+    print(pessoa.nome)
+    print(pessoa.idade)
+    cliente = Cliente('Lucas', 26)
+    print(cliente.nome)
+    print(cliente.idade)
