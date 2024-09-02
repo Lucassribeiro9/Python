@@ -17,7 +17,10 @@ class Conta(abc.ABC):
     
     def detalhes(self, msg=''):
         print(f'O seu saldo é {self.saldo:.2f} {msg}')    
-    
+    def __repr__(self):
+        class_name = type(self).__name__
+        attrs = f'agencia={self.agencia}, conta={self.conta}, saldo={self.saldo}'
+        return f'{class_name}({attrs})'
 class ContaPoupanca(Conta):
         def sacar(self, valor):
             valor_pos_saque = self.saldo - valor
@@ -43,5 +46,10 @@ class ContaCorrente(Conta):
 
         print('Saldo insuficiente para saque')
         self.detalhes(f'Saldo insuficiente para saque: R${valor:.2f}')
+    
+    def __repr__(self):
+        class_name = type(self).__name__
+        attrs = f'agencia={self.agencia}, conta={self.conta}, saldo={self.saldo}, limite={self.limite}'
+        return f'{class_name}({attrs})'
 if __name__ == '__main__':
     ...
