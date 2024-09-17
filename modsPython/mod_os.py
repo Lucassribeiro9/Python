@@ -1,4 +1,9 @@
 import os
 
-os.system('cls')
-os.system('echo "Hola mundo"')
+caminho = os.getcwd()
+listar = os.listdir(caminho)
+acessar = os.walk(caminho)
+for item in listar:
+    print(item)
+
+print(acessar)
