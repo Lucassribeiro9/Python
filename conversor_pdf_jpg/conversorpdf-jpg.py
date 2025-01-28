@@ -11,7 +11,7 @@ def pdf_to_jpg(pdf_path, output_folder):
         print(f"Página {i + 1} salva em: {output_file}")
 
 # Exemplo de uso
-pdf_path = "arquivo.pdf"  # Caminho do PDF
+pdf_path = input("Digite o caminho do arquivo PDF: ")
 output_folder = "output"  # Pasta de saída
 
 # Cria a pasta de saída, se não existir
