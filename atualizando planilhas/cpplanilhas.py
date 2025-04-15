@@ -10,7 +10,7 @@ import os
 # A primeira planilha é a que vem da área de trabalho
 plan1 = Path('P:/Publico/COMUM/CERTIFICADO DIGITAL/E-CNPJ - CERTIFICADOS ATUALIZADOS.xlsx')
 # A segunda planilha é a que está na área de trabalho do usuário
-plan2 = Path.home() / 'Desktop' / 'cert_teste.xlsx'
+plan2 = Path('C:/Users/administrador/OneDrive - DACOTA AUDICONTABIL SS/Planilhas_automate/cert_teste.xlsx')
 # A pasta atual é a pasta do Desktop
 pasta_atual = Path.home() / 'Desktop'
 
