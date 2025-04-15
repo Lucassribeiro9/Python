@@ -41,7 +41,9 @@ try:
     # A variável df_select é uma seleção das colunas de interesse
     df_select = df2[colunas]
     # A planilha com as colunas de interesse é salva na planilha2
-    df_select.to_excel(plan2, index=False)
+    with pd.ExcelWriter(plan2, mode='a', if_sheet_exists='replace') as writer:
+        df_select.to_excel(writer, sheet_name='Planilha2', startrow=1, header=False, index=False)
+    
     
 
 except FileNotFoundError:
