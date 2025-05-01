@@ -16,4 +16,8 @@ def get_chrome_browser(site):
     return chrome_browser
 
 browser = get_chrome_browser('https://www.google.com')
-time.sleep(10)
+search_input = WebDriverWait(browser, TIMEOUT).until(
+    EC.presence_of_element_located((By.NAME, 'q'))
+)
+search_input.send_keys('NBA')
+sleep(TIMEOUT)
