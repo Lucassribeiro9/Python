@@ -13,17 +13,17 @@ class MyThread(Thread):
         sleep(self.delay)
         print(f"Exiting {self.name}")
 
-    def vai_demorar(texto, tempo):
+    
+def vai_demorar(texto, tempo):
         sleep(tempo)
-        print(texto)    
+        print(texto)
 
-t1 = MyThread("Thread-1", 5)
+t1 = Thread(target=vai_demorar, args=("Thread 1", 2))
 t1.start()
-t2 = MyThread("Thread-2", 3)
+t2 = Thread(target=vai_demorar, args=("Thread 2", 4))
 t2.start()
-t3 = MyThread("Thread-3", 1)
-t3.start()
 
-for i in range(20):
-    print(i)
-    sleep(1)
+while t1.is_alive():
+    print("Thread 1 ainda está viva")
+    sleep(2)
+print("Thread 1 já morreu")
