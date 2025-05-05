@@ -1,3 +1,19 @@
 # manipulando arquivos pdfs
 # Importando as bibliotecas necessárias
-import PyPDF2
+from pathlib import Path
+from PyPDF2 import PdfReader
+
+# Definindo o caminho do arquivo pdf
+ROOT_DIR = Path(__file__).parent
+PASTA_ORIGINAL = ROOT_DIR / 'pdf_originais'
+PASTA_FINAL = ROOT_DIR / 'pdf_novo'
+REL_BACEN = PASTA_ORIGINAL / 'pdftestebc.pdf'
+
+reader = PdfReader(REL_BACEN)
+print(len(reader.pages))
+page0 = reader.pages[0]
+image0 = page0.images[0]
+
+
+with open (PASTA_FINAL / image0.name, 'wb') as fp:
+    fp.write(image0.data)
