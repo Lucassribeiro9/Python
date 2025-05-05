@@ -1,7 +1,8 @@
 # manipulando arquivos pdfs
 # Importando as bibliotecas necessárias
+from csv import writer
 from pathlib import Path
-from PyPDF2 import PdfReader
+from PyPDF2 import PdfReader, PdfWriter
 
 # Definindo o caminho do arquivo pdf
 ROOT_DIR = Path(__file__).parent
@@ -15,5 +16,9 @@ page0 = reader.pages[0]
 image0 = page0.images[0]
 
 
-with open (PASTA_FINAL / image0.name, 'wb') as fp:
-    fp.write(image0.data)
+for i, page in enumerate(reader.pages):
+    writer = PdfWriter()
+    with open(PASTA_FINAL / f'pdftestebc_{i}.pdf', 'wb') as arquivo:
+        writer.add_page(page)
+        writer.write(arquivo)
+    
