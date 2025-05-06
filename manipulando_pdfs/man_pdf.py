@@ -2,7 +2,7 @@
 # Importando as bibliotecas necessárias
 from csv import writer
 from pathlib import Path
-from PyPDF2 import PdfReader, PdfWriter
+from PyPDF2 import PdfReader, PdfWriter, PdfMerger
 
 # Definindo o caminho do arquivo pdf
 ROOT_DIR = Path(__file__).parent
@@ -21,4 +21,11 @@ for i, page in enumerate(reader.pages):
     with open(PASTA_FINAL / f'pdftestebc_{i}.pdf', 'wb') as arquivo:
         writer.add_page(page)
         writer.write(arquivo)
-    
+
+files = [PASTA_FINAL / f'pdftestebc_{i}.pdf' for i in range(len(reader.pages))]
+# Criando um arquivo CSV com os dados do PDF
+merger = PdfMerger()
+for pdf in files:
+    merger.append(pdf)
+merger.write(PASTA_FINAL / 'pdftestebc_final.pdf')
+merger.close()
