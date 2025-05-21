@@ -1,20 +1,27 @@
 import sys
 
-from main_window import MainWindow
-from paths import WIN_ICON_PATH
+from consts import WIN_ICON_PATH
+from display import Display
+from main_window import Info, MainWindow
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QLabel
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
-    label1 = QLabel("Texto")
-    label1.setStyleSheet("font-style: 50px; font-weight: bold;")
-    window.addWidgetToLayout(label1)
 
+    # Icon
     icon = QIcon(str(WIN_ICON_PATH))
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
-    window.show()
 
+    # Label
+    label = Info("2.0 ^ 2.0 = 4")
+    window.addToVLayout(label)
+    # Display
+    display = Display()
+    window.addToVLayout(display)
+
+    window.adjustFixedSize()
+    window.show()
     app.exec()
