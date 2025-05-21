@@ -1,5 +1,5 @@
 import qdarkstyle
-from consts import PRIMARY_COLOR, DARKER_PRIMARY_COLOR, DARKEST_PRIMARY_COLOR
+from consts import DARKER_PRIMARY_COLOR, DARKEST_PRIMARY_COLOR, PRIMARY_COLOR
 
 qss = f"""
     PushButton[cssClass="specialButton"] {{
@@ -21,4 +21,3 @@ qss = f"""
 def setupTheme(app):
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyside6())
     app.setStyleSheet(app.styleSheet() + qss)
-    

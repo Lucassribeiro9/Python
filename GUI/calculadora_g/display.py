@@ -1,4 +1,4 @@
-from consts import *
+from consts import BIG_FONT, MINIMUM_WIDTH, TEXT_MARGIN
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QLineEdit
 
