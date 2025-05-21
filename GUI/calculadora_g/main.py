@@ -1,7 +1,7 @@
 import sys
 
 from main_window import MainWindow
-from paths import *
+from paths import WIN_ICON_PATH
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QLabel
 

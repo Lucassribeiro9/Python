@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QLabel, QMainWindow, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget
 
 
 class MainWindow(QMainWindow):
@@ -10,10 +10,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.cw)
         self.setWindowTitle("Calculadora")
 
-    def adjust_FixedSize(self):
+    def adjustFixedSize(self):
         self.adjustSize()
         self.setFixedSize(self.width(), self.height())
 
     def addWidgetToLayout(self, widget):
         self.v_layout.addWidget(widget)
-        self.adjust_FixedSize()
+        self.adjustFixedSize()
