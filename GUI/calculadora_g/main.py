@@ -1,6 +1,8 @@
 import sys
 
 from main_window import MainWindow
+from paths import *
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QLabel
 
 if __name__ == "__main__":
@@ -8,8 +10,11 @@ if __name__ == "__main__":
     window = MainWindow()
     label1 = QLabel("Texto")
     label1.setStyleSheet("font-style: 50px; font-weight: bold;")
-    window.v_layout.addWidget(label1)
-    window.adjust_FixedSize()
+    window.addWidgetToLayout(label1)
+
+    icon = QIcon(str(WIN_ICON_PATH))
+    window.setWindowIcon(icon)
+    app.setWindowIcon(icon)
     window.show()
 
     app.exec()
