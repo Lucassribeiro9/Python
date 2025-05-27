@@ -1,11 +1,12 @@
 import sys
 
 from consts import WIN_ICON_PATH
-from display import Display
+from style.display import Display
 from main_window import Info, MainWindow
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
-from styles import setupTheme
+from style.buttons import Button
+from style.styles import setupTheme
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -23,6 +24,10 @@ if __name__ == "__main__":
     # Display
     display = Display()
     window.addToVLayout(display)
+    
+    # Button
+    button = Button("Text button")
+    window.addToVLayout(button)
 
     window.adjustFixedSize()
     window.show()
