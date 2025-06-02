@@ -27,6 +27,10 @@ class ButtonGrid(QGridLayout):
         self._makeGrid()
 
     def _makeGrid(self):
-        for row_number, row in enumerate(self._gridMask):
-            for column_number, button_text in enumerate(row):
-                print("Linha", row_number, "Coluna", column_number, "Text", button_text)
+        for row_number, row_data in enumerate(self._gridMask):
+            for column_number, button_text in enumerate(row_data):
+                button = Button(button_text)
+
+                if button_text not in "0123456789.":
+                    button.setProperty("cssClass", "specialButton")
+                self.addWidget(button, row_number, column_number)
