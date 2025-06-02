@@ -1,11 +1,11 @@
 import sys
 
 from consts import WIN_ICON_PATH
-from style.display import Display
 from main_window import Info, MainWindow
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
-from style.buttons import Button, ButtonGrid
+from style.buttons import ButtonGrid
+from style.display import Display
 from style.styles import setupTheme
 
 if __name__ == "__main__":
@@ -23,16 +23,11 @@ if __name__ == "__main__":
     window.addWidgetToVLayout(label)
     # Display
     display = Display()
-    window.addWidgetToVLayout(display)    # trunk-ignore(git-diff-check/error)
+    window.addWidgetToVLayout(display)  # trunk-ignore(git-diff-check/error)
 
     # Grid
     buttonsGrid = ButtonGrid()
     window.vLayout.addLayout(buttonsGrid)
-
-    # Button
-    buttonsGrid.addWidget(Button(0), 0, 0)
-    buttonsGrid.addWidget(Button(1), 0, 1)
-    buttonsGrid.addWidget(Button(2), 0, 2)
 
     window.adjustFixedSize()
     window.show()
