@@ -1,6 +1,9 @@
 from consts import MEDIUM_FONT
+from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QGridLayout, QPushButton
-from utils import isNumOrDot, isEmpty
+from style.display import Display
+from utils import isEmpty, isNumOrDot
+
 
 class Button(QPushButton):
     def __init__(self, *args, **kwargs) -> None:
@@ -12,10 +15,11 @@ class Button(QPushButton):
         font.setPixelSize(MEDIUM_FONT)
         self.setFont(font)
         self.setProperty("cssClass", "specialButton")
+        self.setCheckable(True)
 
 
 class ButtonGrid(QGridLayout):
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, display: Display, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._gridMask = [
             ["C", "◀", "^", "/"],
@@ -24,6 +28,7 @@ class ButtonGrid(QGridLayout):
             ["1", "2", "3", "+"],
             ["", "0", ".", "="],
         ]
+        self.display = display
         self._makeGrid()
 
     def _makeGrid(self):
@@ -34,3 +39,18 @@ class ButtonGrid(QGridLayout):
                 if not isNumOrDot(button_text) and not isEmpty(button_text):
                     button.setProperty("cssClass", "specialButton")
                 self.addWidget(button, row_number, column_number)
+                buttonSlot = self._makeButtonDisplaySlot(
+                    self._insertButtonTextToDisplay, button
+                )
+                button.clicked.connect(buttonSlot)
+
+    def _makeButtonDisplaySlot(self, func, *args, **kwargs):
+        @Slot(bool)
+        def realSlot(_):
+            func(*args, **kwargs)
+
+        return realSlot
+
+    def _insertButtonTextToDisplay(self, button):
+        button_text = button.text()
+        self.display.insert(button_text)
