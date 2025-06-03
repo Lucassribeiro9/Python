@@ -1,6 +1,6 @@
-from consts import BIG_FONT, MINIMUM_WIDTH, TEXT_MARGIN
+from consts import BIG_FONT, MINIMUM_WIDTH, SMALL_FONT, TEXT_MARGIN
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QLineEdit
+from PySide6.QtWidgets import QLabel, QLineEdit, QWidget
 
 
 class Display(QLineEdit):
@@ -14,3 +14,13 @@ class Display(QLineEdit):
         self.setMinimumWidth(MINIMUM_WIDTH)
         self.setAlignment(Qt.AlignmentFlag.AlignRight)
         self.setTextMargins(*[TEXT_MARGIN for _ in range(4)])
+
+
+class Info(QLabel):
+    def __init__(self, text: str, parent: QWidget | None = None) -> None:
+        super().__init__(text, parent)
+        self.configStyle()
+
+    def configStyle(self):
+        self.setStyleSheet(f"font-size: {SMALL_FONT}px;")
+        self.setAlignment(Qt.AlignmentFlag.AlignRight)
