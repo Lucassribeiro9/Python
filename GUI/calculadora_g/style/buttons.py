@@ -1,7 +1,7 @@
 from consts import MEDIUM_FONT
 from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QGridLayout, QPushButton
-from style.display import Display
+from style.display import Display, Info
 from utils import isEmpty, isNumOrDot, isValidNumber
 
 
@@ -18,7 +18,7 @@ class Button(QPushButton):
 
 
 class ButtonGrid(QGridLayout):
-    def __init__(self, display: Display, *args, **kwargs) -> None:
+    def __init__(self, display: Display, info: Info, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._gridMask = [
             ["C", "◀", "^", "/"],
@@ -28,7 +28,18 @@ class ButtonGrid(QGridLayout):
             ["", "0", ".", "="],
         ]
         self.display = display
+        self.info = info
+        self._equation = ""
         self._makeGrid()
+
+        @property
+        def equation(self):
+            return self._equation
+
+        @equation.setter
+        def equation(self, value):
+            self._equation = value
+            self.info.setText(value)
 
     def _makeGrid(self):
         for row_number, row_data in enumerate(self._gridMask):
@@ -53,7 +64,7 @@ class ButtonGrid(QGridLayout):
     def _insertButtonTextToDisplay(self, button):
         buttonText = button.text()
         newDisplayValue = self.display.text() + buttonText
-        
+
         if not isValidNumber(newDisplayValue):
             return
         self.display.insert(buttonText)
