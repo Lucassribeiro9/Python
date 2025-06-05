@@ -1,7 +1,7 @@
 import sys
 
 from consts import WIN_ICON_PATH
-from main_window import Info, MainWindow
+from main_window import MainWindow
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 from style.buttons import ButtonGrid
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     window.addWidgetToVLayout(info)
     # Display
     display = Display()
-    window.addWidgetToVLayout(display)  # trunk-ignore(git-diff-check/error)
+    window.addWidgetToVLayout(display)
 
     # Grid
     buttonsGrid = ButtonGrid(display, info)

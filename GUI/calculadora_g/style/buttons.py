@@ -30,6 +30,11 @@ class ButtonGrid(QGridLayout):
         self.display = display
         self.info = info
         self._equation = ""
+        self._equationInitialValue = "SUa conta"
+        self._left = None
+        self._right = None
+        self._operator = None
+        self._equation = self._equationInitialValue
         self._makeGrid()
 
         @property
@@ -50,21 +55,24 @@ class ButtonGrid(QGridLayout):
                     button.setProperty("cssClass", "specialButton")
                     self._configSpecialButton(button)
                 self.addWidget(button, row_number, column_number)
-                slot = self._makeSlot(
-                    self._insertButtonTextToDisplay, button
-                )
+                slot = self._makeSlot(self._insertButtonTextToDisplay, button)
                 self._connectButtonClicked(button, slot)
+
     def _connectButtonClicked(self, button, slot):
         """
         Connects the button's clicked signal to the provided slot.
         """
         button.clicked.connect(slot)
+
     def _configSpecialButton(self, button):
         text = button.text()
         if text == "C":
-            slot = self._makeSlot(self._clear)
-            self._connectButtonClicked(button, slot)
-    
+            self._connectButtonClicked(button, self._clear)
+        if text in "+-*/":
+            self._connectButtonClicked(
+                button, self._makeSlot(self._insertOperator, button)
+            )
+
     def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
         def realSlot(_):
@@ -79,8 +87,24 @@ class ButtonGrid(QGridLayout):
         if not isValidNumber(newDisplayValue):
             return
         self.display.insert(buttonText)
-        
-    
+
     def _clear(self):
+        self._left = None
+        self._right = None
+        self._operator = None
+        self.equation = self._equationInitialValue
         self.display.clear()
-        self.equation = ""
+
+    def _insertOperator(self, button):
+        buttonText = button.text()
+        displayText = self.display.text()
+        self.display.clear()
+
+        if not isValidNumber(displayText) and self._left is None:
+            print("Nada para colocar na esquerda")
+            return
+        if self._left is None:
+            self._left = float(displayText)
+
+        self._operator = buttonText
+        self.equation = f"{self._left} {self._operator} ??"
