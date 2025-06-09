@@ -5,7 +5,8 @@ from main_window import MainWindow
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 from style.buttons import ButtonGrid
-from style.display import Display, Info
+from style.info import Info
+from style.display import Display
 from style.styles import setupTheme
 
 if __name__ == "__main__":
@@ -19,14 +20,14 @@ if __name__ == "__main__":
     app.setWindowIcon(icon)
 
     # Label
-    info = Info("Conta")
+    info = Info("Sua conta")
     window.addWidgetToVLayout(info)
     # Display
     display = Display()
     window.addWidgetToVLayout(display)
 
     # Grid
-    buttonsGrid = ButtonGrid(display, info)
+    buttonsGrid = ButtonGrid(display, info, window)
     window.vLayout.addLayout(buttonsGrid)
 
     window.adjustFixedSize()

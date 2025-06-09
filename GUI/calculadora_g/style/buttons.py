@@ -30,7 +30,7 @@ class ButtonGrid(QGridLayout):
         self.display = display
         self.info = info
         self._equation = ""
-        self._equationInitialValue = "SUa conta"
+        self._equationInitialValue = "Sua conta"
         self._left = None
         self._right = None
         self._operator = None
@@ -72,6 +72,8 @@ class ButtonGrid(QGridLayout):
             self._connectButtonClicked(
                 button, self._makeSlot(self._insertOperator, button)
             )
+        if text == "=":
+            self._connectButtonClicked(button, self._makeSlot(self._eq, button))
 
     def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
@@ -108,3 +110,16 @@ class ButtonGrid(QGridLayout):
 
         self._operator = buttonText
         self.equation = f"{self._left} {self._operator} ??"
+
+    def _eq(self):
+        displayText = self.display.text()
+        if (
+            not isValidNumber(displayText)
+            or self._left is None
+            or self._operator is None
+        ):
+            print("Nada para calcular")
+            return
+        self._right = float(displayText)
+        self.equation = f"{self._left} {self._operator} {self._right}"
+        result = eval(self.equation)
