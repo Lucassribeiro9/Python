@@ -1,6 +1,5 @@
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QLabel
-from consts import SMALL_FONT
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget
+
 
 class MainWindow(QMainWindow):
     def __init__(self, parent: QWidget | None = None, *args, **kwargs) -> None:

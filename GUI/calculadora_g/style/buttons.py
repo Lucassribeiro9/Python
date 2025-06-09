@@ -1,7 +1,8 @@
 from consts import MEDIUM_FONT
 from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QGridLayout, QPushButton
-from style.display import Display, Info
+from style.display import Display
+from style.info import Info
 from utils import isEmpty, isNumOrDot, isValidNumber
 
 
@@ -72,8 +73,8 @@ class ButtonGrid(QGridLayout):
             self._connectButtonClicked(
                 button, self._makeSlot(self._insertOperator, button)
             )
-        if text == "=":
-            self._connectButtonClicked(button, self._makeSlot(self._eq, button))
+        if text in "=":
+            self._connectButtonClicked(button, self._makeSlot(button, self._eq))
 
     def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
@@ -122,4 +123,15 @@ class ButtonGrid(QGridLayout):
             return
         self._right = float(displayText)
         self.equation = f"{self._left} {self._operator} {self._right}"
-        result = eval(self.equation)
+        result = 0.0
+
+        try:
+            result = eval(self.equation)
+        except ZeroDivisionError:
+            self.display.setText("Divisão por zero")
+            return
+
+        self.display.clear()
+        self.info.setText(f"{self.equation} = {result}")
+        self._left = result
+        self._right = None
