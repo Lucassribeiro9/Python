@@ -69,6 +69,8 @@ class ButtonGrid(QGridLayout):
 
     def _configSpecialButton(self, button):
         text = button.text()
+        if text == "◀":
+            self._connectButtonClicked(button, self._backspace)
         if text == "C":
             self._connectButtonClicked(button, self._clear)
         if text in "+-*/^":
@@ -82,6 +84,7 @@ class ButtonGrid(QGridLayout):
         @Slot(bool)
         def realSlot(_):
             func(*args, **kwargs)
+
         return realSlot
 
     def _insertButtonTextToDisplay(self, button):
@@ -91,6 +94,9 @@ class ButtonGrid(QGridLayout):
         if not isValidNumber(newDisplayValue):
             return
         self.display.insert(buttonText)
+
+    def _backspace(self):
+        self.display.backspace()
 
     def _clear(self):
         self._left = None
@@ -120,10 +126,10 @@ class ButtonGrid(QGridLayout):
             return
         self._right = float(displayText)
         self.equation = f"{self._left} {self._operator} {self._right}"
-        result = 'error'
+        result = "error"
 
         try:
-            if '^' in self.equation:
+            if "^" in self.equation:
                 result = math.pow(self._left, self._right)
             else:
                 result = eval(self.equation)
@@ -139,5 +145,5 @@ class ButtonGrid(QGridLayout):
         self._left = result
         self._right = None
 
-        if result == 'error':
+        if result == "error":
             self._left = None
