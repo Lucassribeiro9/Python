@@ -1,3 +1,5 @@
+import math
+
 from consts import MEDIUM_FONT
 from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QGridLayout, QPushButton
@@ -69,18 +71,17 @@ class ButtonGrid(QGridLayout):
         text = button.text()
         if text == "C":
             self._connectButtonClicked(button, self._clear)
-        if text in "+-*/":
+        if text in "+-*/^":
             self._connectButtonClicked(
                 button, self._makeSlot(self._insertOperator, button)
             )
         if text in "=":
-            self._connectButtonClicked(button, self._makeSlot(button, self._eq))
+            self._connectButtonClicked(button, self._makeSlot(self._eq))
 
     def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
         def realSlot(_):
             func(*args, **kwargs)
-
         return realSlot
 
     def _insertButtonTextToDisplay(self, button):
@@ -114,24 +115,29 @@ class ButtonGrid(QGridLayout):
 
     def _eq(self):
         displayText = self.display.text()
-        if (
-            not isValidNumber(displayText)
-            or self._left is None
-            or self._operator is None
-        ):
+        if not isValidNumber(displayText):
             print("Nada para calcular")
             return
         self._right = float(displayText)
         self.equation = f"{self._left} {self._operator} {self._right}"
-        result = 0.0
+        result = 'error'
 
         try:
-            result = eval(self.equation)
+            if '^' in self.equation:
+                result = math.pow(self._left, self._right)
+            else:
+                result = eval(self.equation)
         except ZeroDivisionError:
             self.display.setText("Divisão por zero")
+            return
+        except OverflowError:
+            print("Número muito grande")
             return
 
         self.display.clear()
         self.info.setText(f"{self.equation} = {result}")
         self._left = result
         self._right = None
+
+        if result == 'error':
+            self._left = None
