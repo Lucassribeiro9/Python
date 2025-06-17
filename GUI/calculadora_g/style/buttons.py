@@ -81,7 +81,7 @@ class ButtonGrid(QGridLayout):
             self._connectButtonClicked(
                 button, self._makeSlot(self._insertOperator, button)
             )
-        if text in "=":
+        if text == "=":
             self._connectButtonClicked(button, self._makeSlot(self._eq))
 
     def _makeSlot(self, func, *args, **kwargs):
