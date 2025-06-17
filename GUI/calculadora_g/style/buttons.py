@@ -126,7 +126,7 @@ class ButtonGrid(QGridLayout):
     def _eq(self):
         displayText = self.display.text()
         if not isValidNumber(displayText):
-            print("Nada para calcular")
+            self._showError("Nada para calcular. Insira um número válido")
             return
         self._right = float(displayText)
         self.equation = f"{self._left} {self._operator} {self._right}"
@@ -138,10 +138,10 @@ class ButtonGrid(QGridLayout):
             else:
                 result = eval(self.equation)
         except ZeroDivisionError:
-            self.display.setText("Divisão por zero")
+            self._showError("Divisão por zero não é permitida")
             return
         except OverflowError:
-            print("Número muito grande")
+            self._showError("Resultado muito grande para ser calculado")
             return
 
         self.display.clear()
