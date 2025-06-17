@@ -1,6 +1,7 @@
 import math
 
 from consts import MEDIUM_FONT
+from main_window import MainWindow
 from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QGridLayout, QPushButton
 from style.display import Display
@@ -21,7 +22,9 @@ class Button(QPushButton):
 
 
 class ButtonGrid(QGridLayout):
-    def __init__(self, display: Display, info: Info, *args, **kwargs) -> None:
+    def __init__(
+        self, display: Display, info: Info, window: MainWindow, *args, **kwargs
+    ) -> None:
         super().__init__(*args, **kwargs)
         self._gridMask = [
             ["C", "◀", "^", "/"],
@@ -32,6 +35,7 @@ class ButtonGrid(QGridLayout):
         ]
         self.display = display
         self.info = info
+        self.window = window
         self._equation = ""
         self._equationInitialValue = "Sua conta"
         self._left = None
@@ -111,7 +115,7 @@ class ButtonGrid(QGridLayout):
         self.display.clear()
 
         if not isValidNumber(displayText) and self._left is None:
-            print("Nada para colocar na esquerda")
+            self._showError("Insira um número válido antes de inserir um operador")
             return
         if self._left is None:
             self._left = float(displayText)
@@ -147,3 +151,10 @@ class ButtonGrid(QGridLayout):
 
         if result == "error":
             self._left = None
+
+    def _showError(self, message):
+        msgBox = self.window.makeMsgBox()
+        msgBox.setText(message)
+        msgBox.setWindowTitle("Erro")
+        msgBox.setIcon(msgBox.Icon.Warning)
+        msgBox.exec()
