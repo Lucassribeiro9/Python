@@ -57,6 +57,8 @@ class ButtonGrid(QGridLayout):
         self.display.eqPressed.connect(self._eq)
         self.display.delPressed.connect(self.display.backspace)
         self.display.clearPressed.connect(self._clear)
+        self.display.operatorPressed.connect(self._insertOperator)
+        self.display.inputPressed.connect(self._insertButtonTextToDisplay)
 
         for row_number, row_data in enumerate(self._gridMask):
             for column_number, button_text in enumerate(row_data):
@@ -95,8 +97,7 @@ class ButtonGrid(QGridLayout):
 
         return realSlot
 
-    def _insertButtonTextToDisplay(self, button):
-        buttonText = button.text()
+    def _insertButtonTextToDisplay(self, buttonText):
         newDisplayValue = self.display.text() + buttonText
 
         if not isValidNumber(newDisplayValue):
@@ -113,8 +114,7 @@ class ButtonGrid(QGridLayout):
         self.equation = self._equationInitialValue
         self.display.clear()
 
-    def _insertOperator(self, button):
-        buttonText = button.text()
+    def _insertOperator(self, buttonText):
         displayText = self.display.text()
         self.display.clear()
 
