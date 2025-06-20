@@ -9,7 +9,7 @@ class Display(QLineEdit):
     eqPressed = Signal()
     delPressed = Signal()
     clearPressed = Signal()
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.configStyle()
@@ -25,10 +25,10 @@ class Display(QLineEdit):
         text = event.text().strip()
         key = event.key()
         KEYS = Qt.Key
-        isEnter = key in [KEYS.Key_Enter, KEYS.Key_Return]
+        isEnter = key in [KEYS.Key_Enter, KEYS.Key_Return, KEYS.Key_Equal]
         isDelete = key in [KEYS.Key_Backspace, KEYS.Key_Delete]
-        isEscape = key in [KEYS.Key_Escape]
-        
+        isEscape = key in [KEYS.Key_Escape, KEYS.Key_C]
+
         if isEnter:
             self.eqPressed.emit()
             return event.ignore()
@@ -38,7 +38,6 @@ class Display(QLineEdit):
         if isEscape:
             self.clearPressed.emit()
             return event.ignore()
-            
+
         if isEmpty(text):
             return event.ignore()
-        
