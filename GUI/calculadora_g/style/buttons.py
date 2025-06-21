@@ -31,7 +31,7 @@ class ButtonGrid(QGridLayout):
             ["7", "8", "9", "*"],
             ["4", "5", "6", "-"],
             ["1", "2", "3", "+"],
-            ["", "0", ".", "="],
+            ["N", "0", ".", "="],
         ]
         self.display = display
         self.info = info
@@ -89,6 +89,8 @@ class ButtonGrid(QGridLayout):
             )
         if text == "=":
             self._connectButtonClicked(button, self._makeSlot(self._eq))
+        if text == "N":
+            self._connectButtonClicked(button, self._makeSlot(self._invertNumber))
 
     def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
@@ -109,8 +111,20 @@ class ButtonGrid(QGridLayout):
         else:
             self.equation = self.display.text()
 
+    @Slot()
     def _backspace(self):
         self.display.backspace()
+
+    @Slot()
+    def _invertNumber(self):
+        displayText = self.display.text()
+        if not isValidNumber(displayText):
+            return
+        self.display.setText(str(-float(displayText)))
+        if self._operator:
+            self.equation = f"{self._left} {self._operator} {self.display.text()}"
+        else:
+            self.equation = self.display.text()
 
     @Slot()
     def _clear(self):
@@ -164,9 +178,10 @@ class ButtonGrid(QGridLayout):
         if result == "error":
             self._left = None
 
+    @Slot()
     def _showError(self, message):
-        msgBox = self.window.makeMsgBox()
-        msgBox.setText(message)
-        msgBox.setWindowTitle("Erro")
-        msgBox.setIcon(msgBox.Icon.Warning)
-        msgBox.exec()
+        msg_box = self.window.makeMsgBox()
+        msg_box.setText(message)
+        msg_box.setWindowTitle("Erro")
+        msg_box.setIcon(msg_box.Icon.Warning)
+        msg_box.exec()
