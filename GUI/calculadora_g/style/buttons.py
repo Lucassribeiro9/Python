@@ -68,7 +68,7 @@ class ButtonGrid(QGridLayout):
                     button.setProperty("cssClass", "specialButton")
                     self._configSpecialButton(button)
                 self.addWidget(button, row_number, column_number)
-                slot = self._makeSlot(self._insertButtonTextToDisplay, button)
+                slot = self._makeSlot(self._insertButtonTextToDisplay, button.text())
                 self._connectButtonClicked(button, slot)
 
     def _connectButtonClicked(self, button, slot):
@@ -85,7 +85,7 @@ class ButtonGrid(QGridLayout):
             self._connectButtonClicked(button, self._clear)
         if text in "+-*/^":
             self._connectButtonClicked(
-                button, self._makeSlot(self._insertOperator, button)
+                button, self._makeSlot(self._insertOperator, button.text())
             )
         if text == "=":
             self._connectButtonClicked(button, self._makeSlot(self._eq))
@@ -103,7 +103,10 @@ class ButtonGrid(QGridLayout):
         if not isValidNumber(newDisplayValue):
             return
         self.display.insert(buttonText)
-
+        if self._operator:
+            self.equation = f"{self._left} {self._operator} {self.display.text()}"
+        else:
+            self.equation = self.display.text()
     def _backspace(self):
         self.display.backspace()
 
