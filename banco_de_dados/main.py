@@ -11,11 +11,16 @@ TABLE_NAME = "customers"
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
+# Criando tabela
 cursor.execute(
     f"CREATE TABLE IF NOT EXISTS {TABLE_NAME} (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)"
 )
 
-
+# Inserindo dados na tabela
+cursor.execute(
+    f"INSERT INTO {TABLE_NAME} (name, age) VALUES ('John', 25)"
+)
+connection.commit()
 # Fechando conexão com o banco de dados
 cursor.close()
 connection.close()
