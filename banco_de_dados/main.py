@@ -17,8 +17,21 @@ cursor.execute(
 )
 
 # Inserindo dados na tabela
-sql_insert = f"INSERT INTO {TABLE_NAME}" "(name, age)" "VALUES " "(?, ?)"
-cursor.executemany(sql_insert, [["Carlson", 20], ["Lucas", 25], ["João", 30]])
+sql_insert = f"INSERT INTO {TABLE_NAME}" "(name, age)" "VALUES " "(:name, :age)"
+cursor.execute(
+    sql_insert,
+    [
+        {
+            "name": "Joana",
+            "age": 25,
+        },
+        {
+            "name": "Rafaela",
+            "age": 30,
+        },
+        {"name": "Ana", "age": 22},
+    ],
+)
 connection.commit()
 # Fechando conexão com o banco de dados
 cursor.close()
