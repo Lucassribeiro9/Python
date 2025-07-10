@@ -28,6 +28,13 @@ cursor.execute(
     ],
 )
 connection.commit()
+
+# Deletando dados da tabela
+cursor.execute(f"DELETE FROM {TABLE_NAME} WHERE id = 3")
+connection.commit()
+
+# Atualizando dados da tabela
+cursor.execute(f"UPDATE {TABLE_NAME} SET name = 'Marcondes' WHERE id = 2")
 # Fechando conexão com o banco de dados
 cursor.close()
 connection.close()
