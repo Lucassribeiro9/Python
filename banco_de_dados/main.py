@@ -16,10 +16,19 @@ connection = pymysql.connect(
     password=MYSQL_PASSWORD,
     database=MYSQL_DATABASE,
 )
+TABLE_NAME = "customers"
 
 with connection:
     with connection.cursor() as cursor:
         cursor.execute(
-            "CREATE TABLE IF NOT EXISTS customers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL, age INT NOT NULL)"
+            f"CREATE TABLE IF NOT EXISTS {TABLE_NAME} (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL, age INT NOT NULL)"
         )
-        print(cursor)
+    connection.commit()
+    # insert
+    with connection.cursor() as cursor:
+        result = cursor.execute(
+            f"INSERT INTO {TABLE_NAME} (name, age) VALUES (%s, %s)",
+            ("Lucas", 30),
+        )
+    connection.commit()
+    print("Inserted customer")
