@@ -1,40 +1,21 @@
-import sqlite3
-from utils import DB_FILE, TABLE_NAME
+import pymysql
+from dotenv import load_dotenv
+import os
 
-# Criando conexão com o banco de dados
+load_dotenv()
+# Load environment variables from .env file
+MYSQL_HOST = os.getenv('MYSQL_HOST')
+MYSQL_USER = os.getenv('MYSQL_USER')
+MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
+MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
 
-connection = sqlite3.connect(DB_FILE)
-cursor = connection.cursor()
-
-# Criando tabela
-cursor.execute(
-    f"CREATE TABLE IF NOT EXISTS {TABLE_NAME} (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)"
+connection = pymysql.connect(
+    host=MYSQL_HOST,
+    user=MYSQL_USER,
+    password=MYSQL_PASSWORD,
+    database=MYSQL_DATABASE,
 )
 
-# Inserindo dados na tabela
-sql_insert = f"INSERT INTO {TABLE_NAME}" "(name, age)" "VALUES " "(:name, :age)"
-cursor.execute(
-    sql_insert,
-    [
-        {
-            "name": "Joana",
-            "age": 25,
-        },
-        {
-            "name": "Rafaela",
-            "age": 30,
-        },
-        {"name": "Ana", "age": 22},
-    ],
-)
-connection.commit()
-
-# Deletando dados da tabela
-cursor.execute(f"DELETE FROM {TABLE_NAME} WHERE id = 3")
-connection.commit()
-
-# Atualizando dados da tabela
-cursor.execute(f"UPDATE {TABLE_NAME} SET name = 'Marcondes' WHERE id = 2")
-# Fechando conexão com o banco de dados
-cursor.close()
-connection.close()
+with connection:
+    with connection.cursor() as cursor:
+        print("Connected to the database successfully!")
