@@ -26,9 +26,19 @@ with connection:
     connection.commit()
     # insert
     with connection.cursor() as cursor:
-        result = cursor.execute(
-            f"INSERT INTO {TABLE_NAME} (name, age) VALUES (%s, %s)",
-            ("Lucas", 30),
+        sql = (f"INSERT INTO {TABLE_NAME} (name, age) VALUES (%s, %s)")
+        data2 = (
+            ("Lauro", 30),
+            ("Maria", 25),
+            ("João", 40),
+            ("Ana", 35),
+            ("Pedro", 28),
+            ("Carla", 32),
+            ("Rafael", 29),
+            ("Fernanda", 31),
+            ("Roberto", 45),
+            ("Patrícia", 27),
         )
-    connection.commit()
+        result = cursor.executemany(sql, data2)
+        connection.commit()
     print("Inserted customer")
