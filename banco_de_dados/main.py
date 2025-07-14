@@ -42,3 +42,10 @@ with connection:
         result = cursor.executemany(sql, data2)
         connection.commit()
     print("Inserted customer")
+# select
+    with connection.cursor() as cursor:
+        select = (f"SELECT * FROM {TABLE_NAME} WHERE age > 25")
+        result = cursor.execute(select)
+        customers = cursor.fetchall()
+        for customer in customers:
+            print(customer)
