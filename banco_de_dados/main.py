@@ -26,7 +26,7 @@ with connection:
     connection.commit()
     # insert
     with connection.cursor() as cursor:
-        sql = (f"INSERT INTO {TABLE_NAME} (name, age) VALUES (%s, %s)")
+        sql = f"INSERT INTO {TABLE_NAME} (name, age) VALUES (%s, %s)"
         data2 = (
             ("Lauro", 30),
             ("Maria", 25),
@@ -42,17 +42,25 @@ with connection:
         result = cursor.executemany(sql, data2)
         connection.commit()
     print("Inserted customer")
-# select
+    # select
     with connection.cursor() as cursor:
-        select = (f"SELECT * FROM {TABLE_NAME} WHERE age > 25")
+        select = f"SELECT * FROM {TABLE_NAME} WHERE age > 25"
         result = cursor.execute(select)
         customers = cursor.fetchall()
         for customer in customers:
             print(customer)
-# delete
+    # delete
     with connection.cursor() as cursor:
-        delete = (f"DELETE FROM {TABLE_NAME} WHERE id < 30")
+        delete = f"DELETE FROM {TABLE_NAME} WHERE id < 30"
         result = cursor.execute(delete)
+        connection.commit()
+        customers = cursor.fetchall()
+        for customer in customers:
+            print(customer)
+    # update
+    with connection.cursor() as cursor:
+        update = f"UPDATE {TABLE_NAME} SET age = 30 WHERE id = 1"
+        result = cursor.execute(update)
         connection.commit()
         customers = cursor.fetchall()
         for customer in customers:
