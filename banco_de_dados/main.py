@@ -49,3 +49,11 @@ with connection:
         customers = cursor.fetchall()
         for customer in customers:
             print(customer)
+# delete
+    with connection.cursor() as cursor:
+        delete = (f"DELETE FROM {TABLE_NAME} WHERE id < 30")
+        result = cursor.execute(delete)
+        connection.commit()
+        customers = cursor.fetchall()
+        for customer in customers:
+            print(customer)
