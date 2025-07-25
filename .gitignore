@@ -164,3 +164,27 @@ cython_debug/
 
 # Ignore
 banco_de_dados/mysql-data/*
+
+# Docker
+.dockerignore      
+.env               
+
+# Docker Compose logs e outros gerados
+docker-compose.yml.backup # Se você criar backups do compose
+docker-compose.*.override.yml # Arquivos de override específicos
+
+
+# Dev Containers (gerados pelo VS Code)
+# A pasta .devcontainer DEVE ser versionada, mas alguns arquivos internos podem ser ignorados
+# O VS Code geralmente lida bem com isso, mas se vir logs ou caches extras, adicione aqui.
+.devcontainer/.devcontainer_history
+.devcontainer/.workspace_folder
+
+# Logs
+*.log
+log/
+tmp/
+
+# Banco de Dados (se você adicionar um DB SQLite, por exemplo)
+*.sqlite3
+*.db
