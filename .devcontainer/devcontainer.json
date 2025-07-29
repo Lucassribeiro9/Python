@@ -1,0 +1,32 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Python estudos",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../DOCKERFILE"
+	},
+	"postCreateCommand": "pip install -r requirements.txt",
+	"workspaceFolder": "/workspace",
+	"customizations": {
+		"vscode": {
+			// Add the IDs of extensions you want to install here.
+			"extensions": [
+				"ms-python.python",
+				"ms-toolsai.jupyter"
+			],
+			// Add any VS Code settings you want to apply.
+			"settings": {
+				"python.pythonPath": "/usr/local/bin/python3",
+				"python.formatting.provider": "autopep8",
+				"editor.formatOnSave": true
+			}
+		},
+	"mounts": [
+		// Mount the workspace folder to the container.
+		"source=${localWorkspaceFolder}/..,target=/workspace,type=bind,consistency=cached"
+	]
+	}
+}
