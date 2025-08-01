@@ -17,18 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
+from home.views import home
+from blog.views import my_view
 # HTTP Request <-> HTTP Response
 # MVT (MVC)
 
 def home(request):
     print("Request received")
-    return HttpResponse("home")
+    return HttpResponse("home1")
 
 def my_view(request):
     return HttpResponse("We have a special message for you!")
 
 urlpatterns = [
-    path('', home),
+    path('', home.views.home),
     path('admin/', admin.site.urls),
-    path('blog/', my_view),
+    path('blog/', blog.views.my_view),
 ]
