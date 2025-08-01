@@ -20,10 +20,15 @@ from django.http import HttpResponse
 # HTTP Request <-> HTTP Response
 # MVT (MVC)
 
+def home(request):
+    print("Request received")
+    return HttpResponse("home")
+
 def my_view(request):
     return HttpResponse("We have a special message for you!")
-    
+
 urlpatterns = [
+    path('', home),
     path('admin/', admin.site.urls),
     path('blog/', my_view),
 ]
