@@ -1,7 +1,10 @@
-# from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render
 
 # Create your views here.
 def blog(request):
     print("Request received")
-    return HttpResponse("We have a special message for you!")
+    return render(request, 'blog/index.html')
+
+def exemplo(request):
+    print("Exemplo view")
+    return render(request, 'blog/exemplo.html')
