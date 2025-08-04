@@ -1,3 +1,31 @@
 body{
-    background-color: red;
+    background-color: #ffe6e6; /* rosa claro */
+}
+
+a,
+a:hover,
+a:active{
+    color: #ff9999; /* vermelho claro */
+}
+
+h1,
+h2,
+h3{
+    color: #ff6666; /* vermelho médio */
+}
+
+p,
+li{
+    color: #ffcccc; /* rosa médio */
+}
+
+button,
+input[type="submit"]{
+    background-color: #ff6666; /* vermelho médio */
+    color: #fff; /* branco */
+}
+
+button:hover,
+input[type="submit"]:hover{
+    background-color: #ff9999; /* vermelho claro */
 }
