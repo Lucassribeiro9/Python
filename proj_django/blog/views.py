@@ -1,9 +1,10 @@
+from blog.data import posts
 from django.shortcuts import render
 
 # Create your views here.
 def blog(request):
     print("Request received")
-    context = {"title": "Blog Page", "message": "Welcome to the Blog Page!"}
+    context = {"title": "Blog Page", "posts": posts}
     return render(request, 'blog/index.html', context)
 
 def exemplo(request):
